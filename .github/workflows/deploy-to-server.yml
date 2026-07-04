@@ -1,0 +1,21 @@
+# Deploy to Server
+
+name: Deploy to Server
+
+on:
+    workflow_call:
+
+jobs:
+    deploy:
+        environment:
+            name: DevOps   # This is configured for manual approval
+        
+        name: Deploy to Server
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy
+              run: |
+                echo "Deploy to Server is successfull." 
+
+
+

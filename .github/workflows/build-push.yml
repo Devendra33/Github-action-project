@@ -5,6 +5,7 @@ on:
 
 jobs:
     build-and-push:
+        name: publish to DockerHub
         runs-on: ubuntu-latest
         steps:
 

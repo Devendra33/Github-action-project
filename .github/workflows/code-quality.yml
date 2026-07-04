@@ -12,6 +12,7 @@ on:
 
 jobs:
     linter:
+        name: SAST & Lint
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false

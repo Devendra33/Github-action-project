@@ -8,6 +8,7 @@ on:
 
 jobs:
     validate-dockerfile:
+        name: Hadolint Dockerfile
         runs-on: ubuntu-latest
         steps:
 
