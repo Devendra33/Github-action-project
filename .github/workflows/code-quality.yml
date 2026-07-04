@@ -1,6 +1,8 @@
-# Code scan with flake8
+# Code Quality check
+# Uses flake8 for lint
+# Uses Bandit for SAST
 
-name: code scan
+name: Code Quality
 
 # runs when code pushes in the main
 on:
@@ -11,6 +13,7 @@ jobs:
     linter:
         runs-on: ubuntu-latest
         strategy:
+            fail-fast: false
             matrix:
                 python-version: ["3.11","3.12","3.13"]
         steps:
@@ -24,10 +27,19 @@ jobs:
               uses: actions/setup-python@v5
               with:
                 python-version: ${{ matrix.python-version }}
+
+            # install all the required packages
+            - name: install packages
+              run: pip install -r requirements.txt
             
             # installing flake 8 to perform linting
             - name: linter install
               run: pip install flake8 
-
+            
+            # check lint
             - name: scan code for syntax
               run: flake8 app.py
+            
+            # Run SAST
+            - name: run SAST
+              run: bandit -r app.py
