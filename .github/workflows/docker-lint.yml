@@ -4,15 +4,18 @@
 name: Docker lint
 
 on:
-    workflow_dispatch:
+    workflow_call:
 
 jobs:
     validate-dockerfile:
         runs-on: ubuntu-latest
         steps:
+
+            # code copy from repo to agent
             - name: checkout code
               uses: actions/checkout@v4
 
+            # Action for handolint
             - name: validate dockerfile handolint 
               uses: hadolint/hadolint-action@v3.1.0
               with:

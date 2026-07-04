@@ -10,9 +10,12 @@ jobs:
     dependency-check:
         runs-on: ubuntu-latest
         steps:
+
+            # code copy from repo to agent
             - name: code checkout
               uses: actions/checkout@v4
             
+            # Action for pip audit
             - name: pip dependency audit
               uses: pypa/gh-action-pip-audit@v1.1.0
               with:
