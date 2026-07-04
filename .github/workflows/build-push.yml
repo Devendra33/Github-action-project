@@ -18,6 +18,10 @@ jobs:
               with:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}  # PAT Token with read and write access generated from docker hub
+
+            - name: Testing of Username
+              run: |
+                echo ${{ vars.DOCKERHUB_USERNAME }}
             
             # Action to push the image to Docker Hub (Building the image is automatically)
             - name: Build & Push to Docker Hub
@@ -26,7 +30,8 @@ jobs:
                 context: .  # Location for dockerfile
                 push: true
                 tags: |
-                    ${{ vars.DOCKERHUB_USER }}/pythondemoapp:${{ github.ref_name }} 
-                    ${{ vars.DOCKERHUB_USER }}/pythondemoapp:latest
-                    ${{ vars.DOCKERHUB_USER }}/pythondemoapp:${{ github.sha}}
+                  devendragohare16/pythondemoapp:${{ github.sha }}
+                  devendragohare16/pythondemoapp:${{ github.ref_name }}
+                  devendragohare16/pythondemoapp:latest
+
             
