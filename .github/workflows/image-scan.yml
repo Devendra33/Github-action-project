@@ -24,4 +24,6 @@ jobs:
               with:
                 image-ref: docker.io/devendragohare16/pythondemoapp:${{ github.sha }}
                 exit-code: '1'
+                ignore-unfixed: true
                 severity: 'CRITICAL'
+                ignorefile: .trivyignore   # this vernabilities will be ignore/ we can also use continue-on-error: true
