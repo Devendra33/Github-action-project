@@ -21,14 +21,15 @@ jobs:
         uses: ./.github/workflows/docker-lint.yml
 
     # Build once the security scans and tests are complete
-    build:
+    build-push:
+        name: 🏗️ Build Application
         needs: [code-quality, secrets-scan, dependency-scan, docker-scan]
         uses: ./.github/workflows/build-push.yml
-        secrets: inherit
+        secrets: inherit    
 
     # Image scan 
     trivy:
-        needs: [build]
+        needs: [build-push]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
 
