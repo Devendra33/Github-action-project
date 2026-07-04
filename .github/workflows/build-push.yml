@@ -1,28 +1,32 @@
 name: Build & Push to DockerHub
 
 on:
-    workflow_dispatch:
+    workflow_call:
 
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
         steps:
+
+            # code copy from repo to agent
             - name: checkout code
               uses: actions/checkout@v4
             
+            # Login to Docker Hub
             - name: Login to Docker Hub
               uses: docker/login-action@v4
               with:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
-                password: ${{ secrets.DOCKERHUB_TOKEN }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}  # PAT Token with read and write access generated from docker hub
             
+            # Action to push the image to Docker Hub (Building the image is automatically)
             - name: Build & Push to Docker Hub
               uses: docker/build-push-action@v6
               with:
-                context: .
+                context: .  # Location for dockerfile
                 push: true
                 tags: |
-                    ${{ vars.DOCKERHUB_USER }}/pythondemoapp:${{ github.ref_name }}
+                    ${{ vars.DOCKERHUB_USER }}/pythondemoapp:${{ github.ref_name }} 
                     ${{ vars.DOCKERHUB_USER }}/pythondemoapp:latest
                     ${{ vars.DOCKERHUB_USER }}/pythondemoapp:${{ github.sha}}
             
