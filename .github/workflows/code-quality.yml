@@ -8,8 +8,7 @@ name: Code Quality
 
 # runs when code pushes in the main
 on:
-    push:
-        branches: [main]
+    workflow_call:
 
 jobs:
     linter:

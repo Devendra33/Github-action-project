@@ -1,3 +1,19 @@
 # To check the quality of packages we are using in the app. to check vernabilites [CVEs]
+# uses pip-audit
 
 name: Dependency Scan
+
+on:
+    workflow_dispatch:
+
+jobs:
+    dependency-check:
+        runs-on: ubuntu latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+            
+            - name: pip dependency audit
+              uses: pypa/gh-action-pip-audit@v1.1.0
+              with:
+                inputs: requirements.txt
