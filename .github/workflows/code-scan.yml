@@ -1,0 +1,30 @@
+# Code scan with flake8
+
+name: code scan
+
+# runs when code pushes in the main
+on:
+    push:
+        branches: [main]
+
+jobs:
+    linter:
+        runs-on: ubuntu-latest
+        steps:
+
+            # code copy from repo to agent
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            # set up python
+            - name: setup python 3.12
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.12"
+            
+            # installing flake 8 to perform linting
+            - name: linter install
+              run: pip install flake8 
+
+            - name: scan code for syntax
+              run: flake8 app.py
