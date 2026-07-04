@@ -1,5 +1,7 @@
 # Code Quality check
-# Uses flake8 for lint
+# Uses flake8 for lint - to make it right we can use black package to format python code
+  # pip install black
+  # black app.py [format in such order that it passes lint step]
 # Uses Bandit for SAST
 
 name: Code Quality
