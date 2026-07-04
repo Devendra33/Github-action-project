@@ -30,8 +30,8 @@ jobs:
                 context: .  # Location for dockerfile
                 push: true
                 tags: |
-                  devendragohare16/pythondemoapp:${{ github.sha }}
-                  devendragohare16/pythondemoapp:${{ github.ref_name }}
-                  devendragohare16/pythondemoapp:latest
+                  ${{ vars.DOCKERHUB_USERNAME }}/pythondemoapp:${{ github.sha }}
+                  ${{ vars.DOCKERHUB_USERNAME }}/pythondemoapp:${{ github.ref_name }}
+                  ${{ vars.DOCKERHUB_USERNAME }}/pythondemoapp:latest
 
             
