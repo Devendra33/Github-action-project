@@ -8,33 +8,39 @@ on:
 jobs:
     # CI (Continous Integration with Security Scanning)
     code-quality:
+        name: 🧹 Code Quality
         uses: ./.github/workflows/code-quality.yml
 
     secrets-scan:
+        name: 🔐 Secret Scan
         uses: ./.github/workflows/secrets-scan.yml
         secrets: inherit
     
     dependency-scan:
+        name: 📦 Dependency Scan
         uses: ./.github/workflows/dependency-scan.yml
     
     docker-scan:
+        name: 🐳 Dockerfile Lint
         uses: ./.github/workflows/docker-lint.yml
 
     # Build once the security scans and tests are complete
     build-push:
-        name: 🏗️ Build Application
+        name: 🏗️ Build & Push Image
         needs: [code-quality, secrets-scan, dependency-scan, docker-scan]
         uses: ./.github/workflows/build-push.yml
         secrets: inherit    
 
     # Image scan 
     trivy:
+        name: 🛡️ Trivy Image Scan
         needs: [build-push]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
 
     # CD : Deploy to Production 
     # deploy:
+    #     name: 🚀 Deploy to Production
     #     needs: [trivy]
     #     uses: ./.github/workflows/deploy-to-server.yml
     #     secrets: inherit
