@@ -17,5 +17,7 @@ jobs:
               run: |
                 echo "Deploy to Server is successfull." 
 
+## This part is left uncompleted intentionally because target of deployment location can change
+
 
 
